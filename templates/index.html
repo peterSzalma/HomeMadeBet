@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div id="body-wrapper">
+        <section>
+            <h1 class="title-text-center">Welcome page</h1>
+            <div class="card">
+                <h2>Welcome football lovers!</h2>
+                <p>This great site is happy to bring you your favourite Football league's.</p>
+                <p></p>
+                <p>Okay, actually this page show only the Premier League.</p>
+                <p>You can find today's matches, and lot of information about PL.</p>
+            </div>
+            <div class="card">
+                <h3>Today Matches</h3>
+                <ul class="pl-navbar">
+                    <li class="rang-table"><a href="/premier-league">Premier League</a></li>
+                    <li class="score-table"><a href="/bundesliga">Bundesliga</a></li>
+                    <li class="remaining-table"><a href="/seria-a">Seria A</a></li>
+                    <li class="remaining-table"><a href="/la-liga">La Liga</a></li>
+                </ul>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Round</th>
+                            <th>Home Team</th>
+                            <th>Home Team goal(s)</th>
+                            <th>Away Team goal(s)</th>
+                            <th>Away Team</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="todayMatchData">
+
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+    </div>
+{% endblock %}

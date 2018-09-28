@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+    <form action="/login" method="post">
+        <div class="form-group">
+            <h1>Login</h1>
+            <p>
+                {% if success is sameas false %}
+                Wrong Username or Password!
+                {% else %}
+                Please fill in this form to login.
+                {% endif %}
+            </p>
+            <hr>
+            <br>
+            <label for="user"><b>Username</b></label><br>
+            <input type="text" class="form-control" placeholder="Enter Username" name="uname" required>
+            <br>
+        </div>
+        <div class="form-group">
+            <label for="password"><b>Password</b></label><br>
+            <input class="form-control" type="password" placeholder="Enter Password" name="pwd" required>
+            <br>
+            <hr>
+            <button type="submit" class="btn btn-success">Login</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

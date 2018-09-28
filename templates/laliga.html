@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div id="body-wrapper">
+    <section>
+        <h1 class="title-text-center">La Liga</h1>
+        <div class="card">
+            <h2>This is La Liga!</h2>
+            <p>This great site is happy to bring you your favourite TV show's <i>details</i>.</p>
+            <p></p>
+            <p>Okay, actually this is a designed dumb page without any logic.</p>
+            <p>You can find a navigational element, the so called "breadcrumb" above the page's title. Use it for
+                in-depth
+                navigation.
+            </p>
+        </div>
+        <div class="card">
+            This is an example for a table:
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th>Round</th>
+                    <th>Home Team</th>
+                    <th>Home Team goal(s)</th>
+                    <th>Away Team goal(s)</th>
+                    <th>Away Team</th>
+                    <th>Elapsed Time</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id="matchData">
+
+                </tbody>
+
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}
