@@ -1,5 +1,26 @@
 body {
-    background-color: #00ff85;
+    background-color: cornflowerblue;
+}
+
+.pl {
+    background-color: #04f5ff;
+}
+
+.bundesliga {
+    background-color: white;
+}
+
+#bundes-card {
+    background-color: red;
+    color: white;
+}
+
+.seria_a {
+    background-color: darkgreen;
+}
+
+.laliga {
+    background-color: grey;
 }
 .container {
     padding-left: 15%;
@@ -26,7 +47,7 @@ body {
     position: relative;
 
     display: block;
-    color: #38003c;
+    color: black;
     margin-bottom: 40px;
     margin-left: 100px;
     margin-right: 100px;
@@ -44,7 +65,7 @@ body {
     font-size: 50px;
     margin-top: 30px;
     margin-bottom: 30px;
-    color: #38003c;
+    color: black;
 }
 
 
@@ -66,6 +87,28 @@ body {
 
 }
 
+#bundesliga-logo {
+    height: 5%;
+    width: 8%;
+    padding: 10px;
+}
+
+#seria-a-logo {
+    height: 5%;
+    width: 8%;
+    padding: 10px;
+}
+
+#laliga-logo {
+    height: 5%;
+    width: 8%;
+    padding: 10px;
+}
+
+#points {
+    font-weight: bold;
+}
+
 #matchData {
     table-border-color-dark: #04f5ff;
 }
@@ -79,8 +122,12 @@ body {
 
 }
 
-.modal-lg {
-    size: auto;
+.bundes-navbar {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    border: red;
+    background-color: red;
 }
 
 .rang-table, .score-table, .remaining-table {

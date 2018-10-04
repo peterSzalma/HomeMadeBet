@@ -1,38 +1,224 @@
-{% extends 'layout.html' %}
-{% block content %}
-<div id="body-wrapper">
-    <section>
-        <h1 class="title-text-center">Bundesliga</h1>
-        <div class="card">
-            <h2>This is Bundesliga!</h2>
-            <p>This great site is happy to bring you your favourite TV show's <i>details</i>.</p>
-            <p></p>
-            <p>Okay, actually this is a designed dumb page without any logic.</p>
-            <p>You can find a navigational element, the so called "breadcrumb" above the page's title. Use it for
-                in-depth
-                navigation.
-            </p>
-        </div>
-        <div class="card">
-            This is an example for a table:
-            <table class="table table-bordered">
-                <thead class="thead-light">
-                <tr>
-                    <th>Round</th>
-                    <th>Home Team</th>
-                    <th>Home Team goal(s)</th>
-                    <th>Away Team goal(s)</th>
-                    <th>Away Team</th>
-                    <th>Elapsed Time</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody id="matchData">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home Made Bet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/football-icon.png') }}">
 
-                </tbody>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
-            </table>
+    <script src="{{ url_for('static', filename='js/bundes/bundes.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/matches.js') }}" defer></script>
+</head>
+<body class="bundesliga">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <img id="header-logo" src="{{ url_for('static', filename='img/football-icon.png') }}" alt="Logo">
+            <li class="nav-item"><a class="nav-link active" href="/">Home page</a></li>
+            {% if session['username'] %}
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                <li class="nav-item" id="loggedin"> You are logged in as: {{ session['username'] }}</li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="/registration">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div id="body-wrapper">
+        <section>
+            <h1 class="title-text-center">
+            <span><img id="bundesliga-logo" src="{{ url_for('static', filename='img/bundesliga-logo.png') }}">
+            </span>Bundesliga
+            </h1>
+            <div class="card" id="bundes-card">
+                <h2>This is Bundesliga!</h2>
+                <p>The Bundesliga, is a professional
+                    association football league in Germany and the football league with the highest
+                    average stadium attendance worldwide.
+                </p>
+                <p></p>
+                <p>The Bundesliga comprises 18 teams and operates on a system of promotion and relegation with
+                    the 2. Bundesliga.
+                </p>
+                <p>If you want to know more about Bundesliga, check this
+                    <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Bundesliga">page</a>
+                </p>
+            </div>
+            <div class="card" id="bundes-card">
+                <h3>Bundesliga Matches:</h3>
+                <ul class="bundes-navbar">
+                    <li>
+                        <button class="rang-table" data-toggle="modal" data-target="#leaderBoardModalSm">Leader Board
+                        </button>
+                    </li>
+                    <li>
+                        <button class="score-table" data-toggle="modal" data-target="#scoreBoardModalSm">Score Board
+                        </button>
+                    </li>
+                    <li>
+                        <button class="remaining-table" data-toggle="modal" data-target="#remainingMatchesModalSm">
+                            Remaining Matches
+                        </button>
+                    </li>
+                </ul>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Round</th>
+                        <th>Home Team</th>
+                        <th>Home Team goal(s)</th>
+                        <th>Away Team goal(s)</th>
+                        <th>Away Team</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody id="matchData">
+
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+    </div>
+    <!-- LeaderBoard Modal -->
+    <div class="modal fade bd-example-modal-lg" id="leaderBoardModalSm" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <!-- Change class .modal-sm to change the size of the modal -->
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title w-100" id="myModalLabel">Leader Board</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Position</th>
+                            <th>Team Name</th>
+                            <th>Played Games</th>
+                            <th>Won</th>
+                            <th>Lost</th>
+                            <th>Goals For</th>
+                            <th>Goal Against</th>
+                            <th>Goal Difference</th>
+                            <th>Points</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table table-bordered" id="leaderBoardData">
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+    <!-- Leader Board Modal -->
+
+    <!-- Score Modal -->
+    <div class="modal fade bd-example-modal-lg" id="scoreBoardModalSm" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <!-- Change class .modal-sm to change the size of the modal -->
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title w-100" id="myModalLabel">Score Board</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Player Name</th>
+                            <th>Team Name</th>
+                            <th>Number of Goals</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table table-bordered" id="scoreBoardData">
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Score Modal -->
+
+    <!-- Remaining Matches Modal -->
+    <div class="modal fade bd-example-modal-lg" id="remainingMatchesModalSm" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <!-- Change class .modal-sm to change the size of the modal -->
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title w-100" id="myModalLabel">Remaining Matches</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Round</th>
+                            <th>Home Team</th>
+                            <th>Away Team</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table table-bordered" id="remainingBoardData">
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Remaining Matches Modal -->
+
+
 </div>
-{% endblock %}
+
+</body>
+</html>

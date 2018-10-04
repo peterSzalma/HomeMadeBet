@@ -1,5 +1,5 @@
 function init() {
-    dom.loadMatches('FINISHED');
+    pl.loadMatches('FINISHED');
 
 }
 
